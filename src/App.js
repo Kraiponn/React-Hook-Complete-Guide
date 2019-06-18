@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Person from './Persons/person';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = props => {
+
+  const [ personsState, setPersonsState ] = useState({
+    persons: [
+      { name: 'kraipon', age: 33 },
+      { name: 'sawitree', age: 32 }
+    ]
+  });
+
+  const [ otherState, setOtherState ] = useState('Some other valueKS');
+
+  console.log(personsState, otherState);
+
+  const switchNameHandler = () => {
+    console.log('OK Good you clicked me.');
+    setPersonsState({
+      persons: [
+        { name: 'kraipon', age: 32 },
+        { name: 'sawitree', age: 32 }
+      ]
+    });
+
+    setOtherState('I am useState');
+  };
+
+    return (
+      <div className="App">
+        <Person 
+          name={personsState.persons[0].name}
+          age={personsState.persons[0].age}>Husband</Person>
+        <Person 
+          name={personsState.persons[1].name}
+          age={personsState.persons[1].age}>Wife</Person>
+        <button onClick={switchNameHandler}>Clicked me</button>
+      </div>
+    );
 }
-
+ 
 export default App;
